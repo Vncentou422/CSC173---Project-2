@@ -61,14 +61,14 @@ TREE makeNode3(char x, TREE t1, TREE t2, TREE t3){
   t2->rightSibling = t3;
   return root;
 }
+char lookahead(){
+  return input[1];
+}
 //do all of the tree making
 TREE Pls(){
 
   curr = input;
   input++;
-  if(curr != NULL){
-    ahead = curr;
-  }
   switch(curr) {
     case '(':
       parens++;
@@ -92,7 +92,7 @@ TREE Pls(){
     case '7':
     case '8':
     case '9':
-      if(ahead == 0||1||2||3||4||5||6||7||8||9){
+      if(lookahead() == '0'||'1'||'2'||'3'||'4'||'5'||'6'||'7'||'8'||'9'){
         input++;
         return (makeNode1('E', makeNode2('N', makeNode1('N', makeNode1('D', curr)), makeNode1('D', ahead))));
       }
