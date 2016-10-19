@@ -140,6 +140,6 @@ Tree* Pls(){
       parseTree = makeNode3('E', tempN, makeNode0(curr), tempR);//need to get the left and right part of this equation in somehow.
       break;
     default :
-    statement(s);
+      break;
   }
 }
