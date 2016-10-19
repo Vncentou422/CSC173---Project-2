@@ -23,12 +23,11 @@ char prev;
 char curr;
 char ahead;
 int parens;
-TREE temp;
+TREE tempL, tempR;
 
 
 void main(){
   input = "()()"; /* in practice, a string of terminals would be read from input */
-  temp = (TREE) malloc(sizeof(struct NODE));
   parseTree = (TREE) malloc(sizeof(struct NODE));
 }
 
@@ -60,7 +59,7 @@ TREE makeNode3(char x, TREE t1, TREE t2, TREE t3){
   t2->rightSibling = t3;
   return root;
 }
-
+//do all of the tree making
 TREE Pls(){
 
   curr = input;
@@ -73,7 +72,7 @@ TREE Pls(){
       parens++;
       parseTree = makeNode3('E', makeNode0('('), Pls(), makeNode0(')'));
     break; /* optional */
-    case ')':
+    case ')'://need to add additional cases
       if(parens>0){
         parens--;
       }
@@ -100,7 +99,12 @@ TREE Pls(){
       }
     break; /* optional */
 
-    /* you can have any number of case statements */
+    case '+':
+    case '-':
+    case '/':
+    case '*':
+      parseTree = makeNode3('E', pls(), makeNode0(curr), pls());//need to get the left and right part of this equation in somehow.
+      break;
     default : /* Optional */
     statement(s);
   }
