@@ -1,11 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ParseTree.c>
 
-int main (int argc, char *argv[])
+char[] readFile(filePath) //filepath should be argv[1]
 {
 
-	File *file = fopen(argv[1], "r");
+	File *file = fopen(filePath, "r");
+	char input[] = "";
+	
 	
 	if (file == 0 )
 	{
@@ -20,8 +23,11 @@ int main (int argc, char *argv[])
 	{
 		
 		// reads each character in the file one by one
+		input += in;
 		
 	}
 	fclose(file);
+	
+	return input;
 
 }
