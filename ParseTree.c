@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "ParseReader.h"
 #define FAILED NULL
 typedef struct NODE *TREE;
 
@@ -28,6 +29,7 @@ TREE tempL, tempR;
 
 void main(){
   input = "()()"; /* in practice, a string of terminals would be read from input */
+  input = readFile(argv[1]);
   parseTree = (TREE) malloc(sizeof(struct NODE));
 }
 
@@ -109,3 +111,5 @@ TREE Pls(){
     statement(s);
   }
 }
+
+

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ParseTree.c>
+
 
 char[] readFile(filePath) //filepath should be argv[1]
 {
