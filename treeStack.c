@@ -12,7 +12,7 @@ typedef struct Stack Stack;
 
 TREE peek(stack *y){
   if (y->size == 0){
-    printf("error stack empty\n");
+    //printf("error stack empty\n");
     return -1;
   }
   return y->x[size-1];
@@ -24,12 +24,12 @@ void push(stack *y, TREE input){
     y->x[(y->size)-1] = d;
   }
   else
-    printf("error stack full\n");
+    //printf("error stack full\n");
 }
 
 TREE pop(stack *y){
   if (y->size == 0)
-    printf("error stack empty\n");
+    //printf("error stack empty\n");
   else{
     int output = y->x[(y->size)-1];
     y->size--;

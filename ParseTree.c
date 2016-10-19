@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "ParseReader.h"
-#include "stack.h"
+#include "treeStack.h"
 
 #define FAILED NULL
 typedef struct NODE *TREE;
@@ -27,10 +27,11 @@ char curr;
 char ahead;
 int parens;
 int next;
-stack nodeS;
+treeStack nodeS;
 
 void main(){
   input = "()()";
+  nodeS = (treeStack) malloc(sizeof(struct treeStack));
   input = readFile(argv[1]);
   parseTree = (TREE) malloc(sizeof(struct NODE));
 }
@@ -93,11 +94,14 @@ TREE* Pls(){
       if(!matchTerminal('(')) return NULL;
       TREE* y2 = Pls();
       if(y2==NULL) return NULL;
-      if(!matchTerminal('(')) return NULL;
-      TREE* y4 = Pls();
-      if(y4==NULL) return NULL;
-      return
-      parseTree = makeNode3('E', makeNode0('('), Pls(), makeNode0(')'));
+      if(!matchTerminal(')')) return NULL;
+      if(peekNext()==NULL){
+        return makeNode3('E', makeNode0('('), Pls(), makeNode0(')'));
+      }
+      else{
+        push(nodeS, makeNode3('E', makeNode0('('), Pls(), makeNode0(')')));
+      }
+      return Pls();
     break;
     case '0':
     case '1':
@@ -109,13 +113,13 @@ TREE* Pls(){
     case '7':
     case '8':
     case '9':
-      if(tempL == NULL){
+      if(peek(nodeS) == -1){
         if(peekNext() == '0'||'1'||'2'||'3'||'4'||'5'||'6'||'7'||'8'||'9'){
           input++;
-          tempL = (makeNode1('E', makeNode2('N', makeNode1('N', makeNode1('D', curr)), makeNode1('D', ahead))));
+          push(nodeS, (makeNode1('E', makeNode2('N', makeNode1('N', makeNode1('D', curr)), makeNode1('D', ahead)))));
         }
         else{
-          tempL = (makeNode1('E', makeNode1('N', makeNode1('D', curr)));
+          push(nodeS, (makeNode1('E', makeNode1('N', makeNode1('D', curr)))));
         }
       }
       else{
@@ -128,7 +132,7 @@ TREE* Pls(){
         }
       }
       input++;
-      pls();
+      Pls();
     break;
 
     case '+':
