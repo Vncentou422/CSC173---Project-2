@@ -24,7 +24,8 @@ char prev;
 char curr;
 char ahead;
 int parens;
-TREE tempL, tempR;
+TREE tempN, tempR;
+int next;
 
 
 void main(){
@@ -61,26 +62,41 @@ TREE makeNode3(char x, TREE t1, TREE t2, TREE t3){
   t2->rightSibling = t3;
   return root;
 }
-char lookahead(){
+int lookahead(char c){
+  return input[1]==c;
+}
+int matchTerminal(char c){
+  if(input[1] == c){
+    input++;
+    return 1;
+  }
+  else{
+    return 0;
+  }
+}
+char peekNext(){
   return input[1];
 }
 //do all of the tree making
-TREE Pls(){
+TREE* Pls(){
 
-  curr = input;
-  input++;
+  curr = *input;
+  // switch(next){
+  //   case 1://expression
+  //   break;
+  //   case 2://number
+  //   break;
+  // }
   switch(curr) {
     case '(':
-      parens++;
+      if(!matchTerminal('(')) return NULL;
+      TREE* y2 = Pls();
+      if(y2==NULL) return NULL;
+      if(!matchTerminal('(')) return NULL;
+      TREE* y4 = Pls();
+      if(y4==NULL) return NULL;
+      return
       parseTree = makeNode3('E', makeNode0('('), Pls(), makeNode0(')'));
-    break; /* optional */
-    case ')'://need to add additional cases
-      if(parens>0){
-        parens--;
-      }
-      else{
-        //throw some kind of error
-      }
     break;
     case '0':
     case '1':
@@ -92,22 +108,36 @@ TREE Pls(){
     case '7':
     case '8':
     case '9':
-      if(lookahead() == '0'||'1'||'2'||'3'||'4'||'5'||'6'||'7'||'8'||'9'){
-        input++;
-        return (makeNode1('E', makeNode2('N', makeNode1('N', makeNode1('D', curr)), makeNode1('D', ahead))));
+      if(tempL == NULL){
+        if(peekNext() == '0'||'1'||'2'||'3'||'4'||'5'||'6'||'7'||'8'||'9'){
+          input++;
+          tempL = (makeNode1('E', makeNode2('N', makeNode1('N', makeNode1('D', curr)), makeNode1('D', ahead))));
+        }
+        else{
+          tempL = (makeNode1('E', makeNode1('N', makeNode1('D', curr)));
+        }
       }
       else{
-        return (makeNode1('E', makeNode1('N', makeNode1('D', curr)));
+        if(peekNext() == '0'||'1'||'2'||'3'||'4'||'5'||'6'||'7'||'8'||'9'){
+          input++;
+          return (makeNode1('E', makeNode2('N', makeNode1('N', makeNode1('D', curr)), makeNode1('D', ahead))));
+        }
+        else{
+          return (makeNode1('E', makeNode1('N', makeNode1('D', curr)));
+        }
       }
-    break; /* optional */
+      input++;
+      pls();
+    break;
 
     case '+':
     case '-':
     case '/':
     case '*':
-      parseTree = makeNode3('E', pls(), makeNode0(curr), pls());//need to get the left and right part of this equation in somehow.
+      tempR = Pls();
+      parseTree = makeNode3('E', tempN, makeNode0(curr), tempR);//need to get the left and right part of this equation in somehow.
       break;
-    default : /* Optional */
+    default :
     statement(s);
   }
 }
