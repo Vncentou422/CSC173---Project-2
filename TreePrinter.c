@@ -3,13 +3,9 @@
 #include <string.h>
 #include "ParseTree.h"
 
-int printTree (TREE treeToPrint){
-	
+int printTree (Tree treeToPrint){
 
-	
-	
-	
-	
 
-	
+	printf()
+
 }

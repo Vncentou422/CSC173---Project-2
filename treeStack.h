@@ -3,10 +3,10 @@
 #define MAX 100
 
 struct stack{
-  TREE x[MAX];
+  Tree x[MAX];
   int size = 0;
 };
 typedef struct Stack Stack;
-TREE peek(stack *y);
+Tree peek(stack *y);
 void push(stack *y, int input);
-TREE pop(stack *y);
+Tree pop(stack *y);

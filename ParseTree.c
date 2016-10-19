@@ -5,22 +5,19 @@
 #include "treeStack.h"
 
 #define FAILED NULL
-typedef struct NODE *TREE;
-
-
-
+typedef struct NODE *Tree;
 
 struct NODE {
   char label;
-  TREE leftmostChild, rightSibling;
+  Tree leftmostChild, rightSibling;
 };
 
-TREE makeNode0(char x);
-TREE makeNode1(char x, TREE t);
-TREE makeNode2(char x, TREE t1, TREE t2);
-TREE makeNode3(char x, TREE t1, TREE t2, TREE t3);
+Tree makeNode0(char x);
+Tree makeNode1(char x, Tree t);
+Tree makeNode2(char x, Tree t1, Tree t2);
+Tree makeNode3(char x, Tree t1, Tree t2, Tree t3);
 
-TREE parseTree; /* holds the result of the parse */
+Tree parseTree; /* holds the result of the parse */
 char *input; /* current position in input string */
 char prev;
 char curr;
@@ -33,32 +30,32 @@ void main(){
   input = "()()";
   nodeS = (treeStack) malloc(sizeof(struct treeStack));
   input = readFile(argv[1]);
-  parseTree = (TREE) malloc(sizeof(struct NODE));
+  parseTree = (Tree) malloc(sizeof(struct NODE));
 }
 
-TREE makeNode0(char x){
-  TREE root;
-  root = (TREE) malloc(sizeof(struct NODE));
+Tree makeNode0(char x){
+  Tree root;
+  root = (Tree) malloc(sizeof(struct NODE));
   root->label = x;
   root->leftmostChild = NULL;
   root->rightSibling = NULL;
   return root;
 }
 //char is the root's label, various tree are the children
-TREE makeNode1(char x, TREE t){
-  TREE root;
+Tree makeNode1(char x, Tree t){
+  Tree root;
   root = makeNode0(x);
   root->leftmostChild = t;
   return root;
 }
-TREE makeNode2(char x, TREE t1, TREE t2){
-  TREE root;
+Tree makeNode2(char x, Tree t1, Tree t2){
+  Tree root;
   root = makeNode1(x, t1);
   t1->rightSibling = t2;
   return root;
 }
-TREE makeNode3(char x, TREE t1, TREE t2, TREE t3){
-  TREE root;
+Tree makeNode3(char x, Tree t1, Tree t2, Tree t3){
+  Tree root;
   root = makeNode1(x, t1);
   t1->rightSibling = t2;
   t2->rightSibling = t3;
@@ -80,7 +77,7 @@ char peekNext(){
   return input[1];
 }
 //do all of the tree making
-TREE* Pls(){
+Tree* Pls(){
 
   curr = *input;
   // switch(next){
@@ -92,7 +89,7 @@ TREE* Pls(){
   switch(curr) {
     case '(':
       if(!matchTerminal('(')) return NULL;
-      TREE* y2 = Pls();
+      Tree* y2 = Pls();
       if(y2==NULL) return NULL;
       if(!matchTerminal(')')) return NULL;
       if(peekNext()==NULL){
