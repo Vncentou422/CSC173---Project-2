@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "ParseReader.h"
+#include "stack.h"
+
 #define FAILED NULL
 typedef struct NODE *TREE;
 
@@ -24,12 +26,11 @@ char prev;
 char curr;
 char ahead;
 int parens;
-TREE tempN, tempR;
 int next;
-
+stack nodeS;
 
 void main(){
-  input = "()()"; /* in practice, a string of terminals would be read from input */
+  input = "()()";
   input = readFile(argv[1]);
   parseTree = (TREE) malloc(sizeof(struct NODE));
 }
@@ -141,5 +142,3 @@ TREE* Pls(){
     statement(s);
   }
 }
-
-

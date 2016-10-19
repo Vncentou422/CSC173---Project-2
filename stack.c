@@ -36,5 +36,3 @@ int pop(stack *y){
   }
   return output;
 }
-
-      
