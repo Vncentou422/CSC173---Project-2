@@ -5,12 +5,12 @@
 #define MAX 100
 
 struct stack{
-  TREE x[MAX];
+  Tree x[MAX];
   int size = 0;
 };
 typedef struct Stack Stack;
 
-TREE peek(stack *y){
+Tree peek(stack *y){
   if (y->size == 0){
     //printf("error stack empty\n");
     return -1;
@@ -18,7 +18,7 @@ TREE peek(stack *y){
   return y->x[size-1];
 }
 
-void push(stack *y, TREE input){
+void push(stack *y, Tree input){
   if(y->size < MAX){
     size++;
     y->x[(y->size)-1] = d;
@@ -27,7 +27,7 @@ void push(stack *y, TREE input){
     //printf("error stack full\n");
 }
 
-TREE pop(stack *y){
+Tree pop(stack *y){
   if (y->size == 0)
     //printf("error stack empty\n");
   else{

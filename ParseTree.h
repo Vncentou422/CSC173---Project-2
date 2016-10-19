@@ -2,21 +2,21 @@
 #include <stdlib.h>
 #include <string.h>
 #define FAILED NULL
-typedef struct NODE *TREE;
+typedef struct NODE *Tree;
 struct NODE {
   char label;
-  TREE leftmostChild, rightSibling;
+  Tree leftmostChild, rightSibling;
 };
-TREE parseTree; /* holds the result of the parse */
+Tree parseTree; /* holds the result of the parse */
 char *input; /* current position in input string */
 char prev;
 char curr;
 char ahead;
 int parens;
-TREE tempL, tempR;
-TREE makeNode0(char x);
-TREE makeNode1(char x, TREE t);
-TREE makeNode2(char x, TREE t1, TREE t2);
-TREE makeNode3(char x, TREE t1, TREE t2, TREE t3);
+Tree tempL, tempR;
+Tree makeNode0(char x);
+Tree makeNode1(char x, Tree t);
+Tree makeNode2(char x, Tree t1, Tree t2);
+Tree makeNode3(char x, Tree t1, Tree t2, Tree t3);
 char lookahead();
-TREE Pls();
+Tree Pls();

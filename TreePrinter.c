@@ -3,9 +3,9 @@
 #include <string.h>
 #include "ParseTree.h"
 int tabsToPrint = 0;
-int printTree (TREE treeToPrint){
-	
-	
+int printTree (Tree treeToPrint){
+
+
 	printf()
-	
+
 }
