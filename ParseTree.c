@@ -26,6 +26,7 @@ char *input; /* current position in input string */
 char prev;
 char curr;
 char ahead;
+char tempChar;
 int parens;
 int next;
 treeStack *nodeS;
@@ -74,7 +75,7 @@ Tree * newTree(char **argv){
     input += in;
   }
   fclose(file);
-  input = "1*2+3";
+  input = "1*2";
   printf("%s\n", input);
 }
 
@@ -110,7 +111,7 @@ Tree makeNode0(char x){
   Tree root;
   root = (Tree) malloc(sizeof(struct NODE));
   root->label = x;
-  printf("%c\n",root->label);
+  //printf("%c\n",root->label);
   root->leftmostChild = NULL;
   root->rightSibling = NULL;
   return root;
@@ -153,11 +154,11 @@ char peekNext(){
 }
 void printPTree(Tree t, int indent){
   printf("(");
-  printf("%c ", t[0].label);
+  char c = t->label;
+  printf("%c ", c);
 }
-void printPT(){
-
-  printPTree(parseTree,0);
+void printPT(Tree t){
+  printPTree(t,0);
 }
 //do all of the tree making
 Tree Pls(){
@@ -228,22 +229,29 @@ Tree Pls(){
     case '-':
     case '/':
     case '*':
+      tempChar=curr;
+      //printf("%c\n",curr);
       input++;
       push(nodeS,Pls());
       input--;
       Tree temp;
       temp = pop(nodeS);
-      curr = input;
+      curr = input[0];
       input++;
+      //curr=tempChar;
+      //printf("%c\n",temp);
       if(peekNext() != NULL){
+        //printf(" next char %c\n",peekNext());
         push(nodeS, makeNode3('E', pop(nodeS), makeNode0(curr), temp));
       }
       else{
+        //printf("end");
         return makeNode3('E', pop(nodeS), makeNode0(curr), temp);//need to get the left and right part of this equation in somehow.
       }
       //return makeNode3('E', pop(nodeS), makeNode0(curr), temp);//need to get the left and right part of this equation in somehow.
       break;
     default :
+      //printf("end");
       break;
   }
 }
