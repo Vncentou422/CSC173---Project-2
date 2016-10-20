@@ -24,7 +24,7 @@ char curr;
 char ahead;
 int parens;
 int next;
-treeStack nodeS;
+treeStack *nodeS;
 
 // void main(){
 //   input = "()()";
@@ -42,10 +42,10 @@ Tree makeNode0(char x){
   return root;
 }
 //char is the root's label, various tree are the children
-Tree makeNode1(char x, Tree t){
+Tree makeNode1(char x, Tree t1){
   Tree root;
   root = makeNode0(x);
-  root->leftmostChild = t;
+  root->leftmostChild = t1;
   return root;
 }
 Tree makeNode2(char x, Tree t1, Tree t2){
@@ -74,10 +74,11 @@ int matchTerminal(char c){
   }
 }
 char peekNext(){
-  return input[1];
+  char c = input[1];
+  return c;
 }
 //do all of the tree making
-Tree* Pls(){
+Tree Pls(){
 
   curr = *input;
   // switch(next){
@@ -89,10 +90,10 @@ Tree* Pls(){
   switch(curr) {
     case '(':
       if(!matchTerminal('(')) return NULL;
-      Tree* y2 = Pls();
+      Tree y2 = Pls();
       if(y2==NULL) return NULL;
       if(!matchTerminal(')')) return NULL;
-      if(peekNext()==NULL){
+      if(!peekNext()){
         return makeNode3('E', makeNode0('('), Pls(), makeNode0(')'));
       }
       else{
@@ -110,34 +111,36 @@ Tree* Pls(){
     case '7':
     case '8':
     case '9':
-      if(peek(nodeS) == -1){
+      if(peek(nodeS) != NULL){
         if(peekNext() == '0'||'1'||'2'||'3'||'4'||'5'||'6'||'7'||'8'||'9'){
           input++;
-          push(nodeS, (makeNode1('E', makeNode2('N', makeNode1('N', makeNode1('D', curr)), makeNode1('D', ahead)))));
+          push(nodeS, (makeNode1('E', makeNode2('N', makeNode1('N', makeNode1('D', makeNode0(curr))), makeNode1('D', madeNode0(peekNext()))))));
         }
         else{
-          push(nodeS, (makeNode1('E', makeNode1('N', makeNode1('D', curr)))));
+          push(nodeS, (makeNode1('E', makeNode1('N', makeNode1('D', makeNode0(curr))))));
         }
       }
       else{
         if(peekNext() == '0'||'1'||'2'||'3'||'4'||'5'||'6'||'7'||'8'||'9'){
           input++;
-          return (makeNode1('E', makeNode2('N', makeNode1('N', makeNode1('D', curr)), makeNode1('D', ahead))));
+          return (makeNode1('E', makeNode2('N', makeNode1('N', makeNode1('D', makeNode0(curr))), makeNode1('D', makeNode0(peekNext())))));
         }
         else{
-          return (makeNode1('E', makeNode1('N', makeNode1('D', curr)));
+          return (makeNode1('E', makeNode1('N', makeNode1('D', makeNode0(curr)))));
         }
       }
       input++;
-      Pls();
-    break;
+      return Pls();
+      break;
 
     case '+':
     case '-':
     case '/':
     case '*':
-      tempR = Pls();
-      parseTree = makeNode3('E', tempN, makeNode0(curr), tempR);//need to get the left and right part of this equation in somehow.
+      push(nodeS,Pls());
+      Tree temp;
+      temp = pop(nodeS);
+      parseTree = makeNode3('E', pop(nodeS), makeNode0(curr), temp);//need to get the left and right part of this equation in somehow.
       break;
     default :
       break;

@@ -7,5 +7,5 @@ typedef struct{
   int size;
 }treeStack;
 extern Tree peek(treeStack *y);
-extern void push(treeStack *y, int input);
+extern void push(treeStack *y, Tree input);
 extern Tree pop(treeStack *y);

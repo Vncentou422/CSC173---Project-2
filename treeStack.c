@@ -13,15 +13,15 @@ typedef struct treeStack treeStack;
 Tree peek(treeStack *y){
   if (y->size == 0){
     //printf("error stack empty\n");
-    return -1;
+    return NULL;
   }
   return y->x[size-1];
 }
 
 void push(treeStack *y, Tree input){
   if(y->size < MAX){
+    y->x[(y->size)] = input;
     size++;
-    y->x[(y->size)-1] = d;
   }
   else
     //printf("error stack full\n");
@@ -31,7 +31,7 @@ Tree pop(treeStack *y){
   if (y->size == 0)
     //printf("error stack empty\n");
   else{
-    int output = y->x[(y->size)-1];
+    Tree output = y->x[(y->size)-1];
     y->size--;
   }
   return output;
