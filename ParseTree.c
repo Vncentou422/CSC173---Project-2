@@ -111,7 +111,7 @@ Tree makeNode0(char x){
   Tree root;
   root = (Tree) malloc(sizeof(struct NODE));
   root->label = x;
-  //printf("%c\n",root->label);
+  printf("%c\n",root->label);
   root->leftmostChild = NULL;
   root->rightSibling = NULL;
   return root;
@@ -152,11 +152,33 @@ char peekNext(){
   char c = input[1];
   return c;
 }
+
 void printPTree(Tree t, int indent){
+  int i;
+  for(i=0;i<=indent;i++){
+    printf(" ");
+  }
   printf("(");
   char c = t->label;
   printf("%c ", c);
+  if(t->leftmostChild!=NULL){
+    printf("\n");
+    indent++;
+    Tree tempT=t->leftmostChild;
+    printPTree(tempT,indent);
+    printf(")");
+    while(tempT->rightSibling!=NULL){
+      tempT=tempT->rightSibling;
+      printPTree(tempT,indent);
+      printf(")");
+    }
+  }
+  else{
+
+  }
+
 }
+
 void printPT(Tree t){
   printPTree(t,0);
 }
@@ -245,7 +267,7 @@ Tree Pls(){
         push(nodeS, makeNode3('E', pop(nodeS), makeNode0(curr), temp));
       }
       else{
-        //printf("end");
+        //rintf("end");
         return makeNode3('E', pop(nodeS), makeNode0(curr), temp);//need to get the left and right part of this equation in somehow.
       }
       //return makeNode3('E', pop(nodeS), makeNode0(curr), temp);//need to get the left and right part of this equation in somehow.
