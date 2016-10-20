@@ -4,6 +4,8 @@
 #include "ParseTree.h"
 #define MAX 100
 
+
+
 struct treeStack{
   Tree x[MAX];
   int size = 0;

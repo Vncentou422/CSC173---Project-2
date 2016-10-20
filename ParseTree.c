@@ -2,20 +2,24 @@
 #include <stdlib.h>
 #include <string.h>
 //#include "ParseReader.h"
-#include "treeStack.h"
-
+//#include "treeStack.h"
+#define MAX 100
 #define FAILED NULL
 typedef struct NODE *Tree;
 
-typedef struct NODE {
+struct NODE {
   char label;
   Tree leftmostChild, rightSibling;
 } NODE;
-
-Tree makeNode0(char x);
-Tree makeNode1(char x, Tree t);
-Tree makeNode2(char x, Tree t1, Tree t2);
-Tree makeNode3(char x, Tree t1, Tree t2, Tree t3);
+struct treeStack{
+  Tree x[MAX];
+  int size;
+};
+typedef struct treeStack treeStack;
+// Tree makeNode0(char x);
+// Tree makeNode1(char x, Tree t);
+// Tree makeNode2(char x, Tree t1, Tree t2);
+// Tree makeNode3(char x, Tree t1, Tree t2, Tree t3);
 
 Tree parseTree; /* holds the result of the parse */
 char *input; /* current position in input string */
@@ -26,12 +30,50 @@ int parens;
 int next;
 treeStack *nodeS;
 
-// void main(){
-//   input = "()()";
-//   nodeS = (treeStack) malloc(sizeof(struct treeStack));
-//   input = readFile(argv[1]);
-//   parseTree = (Tree) malloc(sizeof(struct NODE));
-// }
+void main(int argc, char **argv){
+  nodeS = malloc(sizeof(struct treeStack));
+  nodeS->size=0;
+  parseTree = (Tree) malloc(sizeof(struct NODE));
+  FILE *file = fopen(argv[1], "r");
+	input = "";
+	if (file == 0 )
+	{
+
+		printf(" File failed to open \n");
+
+	}
+	char in;
+	while ((in = fgetc(file)) != -1)
+	{
+		// reads each character in the file one by one
+		input += in;
+	}
+	fclose(file);
+
+}
+Tree peek(treeStack *y){
+  return y->x[y->size-1];
+}
+
+void push(treeStack *y, Tree input){
+  if(y->size < MAX){
+    y->x[(y->size)] = input;
+    y->size++;
+  }
+  //else
+    //printf("error stack full\n");
+}
+
+Tree pop(treeStack *y){
+  Tree output;
+  if (y->size == 0){}
+    //printf("error stack empty\n");
+  else{
+    Tree output = y->x[(y->size)-1];
+    y->size--;
+  }
+  return output;
+}
 
 Tree makeNode0(char x){
   Tree root;
@@ -115,7 +157,7 @@ Tree Pls(){
         if(peekNext() == '0'||'1'||'2'||'3'||'4'||'5'||'6'||'7'||'8'||'9'){
           char d = peekNext();
           input++;
-          push(nodeS, (makeNode1('E', makeNode2('N', makeNode1('N', makeNode1('D', makeNode0(curr))), makeNode1('D', madeNode0(d))))));
+          push(nodeS, (makeNode1('E', makeNode2('N', makeNode1('N', makeNode1('D', makeNode0(curr))), makeNode1('D', makeNode0(d))))));
         }
         else{
           push(nodeS, (makeNode1('E', makeNode1('N', makeNode1('D', makeNode0(curr))))));

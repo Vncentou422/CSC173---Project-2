@@ -2,4 +2,4 @@
 #include <stdlib.h>
 #include <string.h>
 
-char[] readFile(filePath)
+char* readFile(char* filePath);
