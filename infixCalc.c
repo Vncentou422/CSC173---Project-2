@@ -18,32 +18,40 @@ int pop(int* stack , int* top){
     return temp;
 }
 
-void calc(int* numstack , int* numtop, int* opstack , int* optop){
+void calc(int* numberStack , int* topNumber, int* operatorStack , int* topOperator){
     int num1;
 	int num2;
 	int answer;
     char sign;
 
-    num2 = pop(numstack,numtop);
-    num1 = pop(numstack,numtop);
+    num2 = pop(numberStack,topNumber);
+    num1 = pop(numberStack,topNumber);
 
-    switch(pop(opstack,optop)){
-        case '+' : answer = num1 + num2; sign = '+' ; break;
-        case '-' : answer = num1 - num2; sign = '-' ; break;
-        case '*' : answer = num1 * num2; sign = '*' ; break;
-        case '/' : answer = num1 / num2; sign = '/' ; break;
+    switch(pop(operatorStack,topOperator)){
+        case '+' : answer = num1 + num2; 
+			sign = '+'; 
+			break;
+        case '-' : answer = num1 - num2; 
+			sign = '-'  
+			break;
+        case '*' : answer = num1 * num2; 
+			sign = '*'; 
+			break;
+        case '/' : answer = num1 / num2; 
+			sign = '/'; 
+			break;
     }
    
-    push(numstack,numtop,answer);
+    push(numberStack,topNumber,answer);
     while(getchar()!='\n'){} 
 }
 
 void calculate(char[] str){
-    int optop = 0;
-	int numtop = 0;
-	int i=0;
-	int numstack[100];
-	int opstack[100];
+    int topOperator = 0;
+	int topNumber = 0;
+	int i =0 ;
+	int numberStack[100];
+	int operatorStack[100];
 	char c;
     
     while(str[i]!='\n'){ i++; }
@@ -59,17 +67,17 @@ void calculate(char[] str){
 		continue; 
 	}
     else if(c=='+'||c=='-'||c=='*'||c=='/') 
-		push(opstack, &optop, c);
+		push(operatorStack, &topOperator, c);
 	
     else if(c>=48 && c <=57) 
-		push(numstack, &numtop, (c-48));
+		push(numberStack, &topNumber, (c-48));
 	
     else if(c==')') 
-		calc(numstack , &numtop, opstack , &optop);
+		calc(numberStack , &topNumber, operatorStack , &topOperator);
     
     i++;
     }
 	
-    printf("\n Evaluation of the tree = %d",pop(numstack,&numtop));
+    printf("\n Evaluation of the tree = %d",pop(numberStack,&topNumber));
     
 }
