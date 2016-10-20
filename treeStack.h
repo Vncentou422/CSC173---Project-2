@@ -2,11 +2,10 @@
 #include "ParseTree.h"
 #define MAX 100
 
-struct stack{
+typedef struct{
   Tree x[MAX];
-  int size = 0;
-};
-typedef struct Stack Stack;
-Tree peek(stack *y);
-void push(stack *y, int input);
-Tree pop(stack *y);
+  int size;
+}treeStack;
+extern Tree peek(treeStack *y);
+extern void push(treeStack *y, int input);
+extern Tree pop(treeStack *y);

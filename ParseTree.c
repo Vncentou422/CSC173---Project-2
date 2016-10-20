@@ -1,16 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "ParseReader.h"
+//#include "ParseReader.h"
 #include "treeStack.h"
 
 #define FAILED NULL
 typedef struct NODE *Tree;
 
-struct NODE {
+typedef struct NODE {
   char label;
   Tree leftmostChild, rightSibling;
-};
+} NODE;
 
 Tree makeNode0(char x);
 Tree makeNode1(char x, Tree t);
@@ -26,12 +26,12 @@ int parens;
 int next;
 treeStack nodeS;
 
-void main(){
-  input = "()()";
-  nodeS = (treeStack) malloc(sizeof(struct treeStack));
-  input = readFile(argv[1]);
-  parseTree = (Tree) malloc(sizeof(struct NODE));
-}
+// void main(){
+//   input = "()()";
+//   nodeS = (treeStack) malloc(sizeof(struct treeStack));
+//   input = readFile(argv[1]);
+//   parseTree = (Tree) malloc(sizeof(struct NODE));
+// }
 
 Tree makeNode0(char x){
   Tree root;
@@ -140,6 +140,6 @@ Tree* Pls(){
       parseTree = makeNode3('E', tempN, makeNode0(curr), tempR);//need to get the left and right part of this equation in somehow.
       break;
     default :
-    statement(s);
+      break;
   }
 }
