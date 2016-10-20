@@ -113,19 +113,19 @@ Tree* Pls(){
       if(peek(nodeS) == -1){
         if(peekNext() == '0'||'1'||'2'||'3'||'4'||'5'||'6'||'7'||'8'||'9'){
           input++;
-          push(nodeS, (makeNode1('E', makeNode2('N', makeNode1('N', makeNode1('D', curr)), makeNode1('D', ahead)))));
+          push(nodeS, (makeNode1('E', makeNode2('N', makeNode1('N', makeNode1('D', makeNode0(curr))), makeNode1('D', madeNode0(ahead))))));
         }
         else{
-          push(nodeS, (makeNode1('E', makeNode1('N', makeNode1('D', curr)))));
+          push(nodeS, (makeNode1('E', makeNode1('N', makeNode1('D', makeNode0(curr))))));
         }
       }
       else{
         if(peekNext() == '0'||'1'||'2'||'3'||'4'||'5'||'6'||'7'||'8'||'9'){
           input++;
-          return (makeNode1('E', makeNode2('N', makeNode1('N', makeNode1('D', curr)), makeNode1('D', ahead))));
+          return (makeNode1('E', makeNode2('N', makeNode1('N', makeNode1('D', makeNode0(curr))), makeNode1('D', makeNode0(ahead)))));
         }
         else{
-          return (makeNode1('E', makeNode1('N', makeNode1('D', curr)));
+          return (makeNode1('E', makeNode1('N', makeNode1('D', makeNode0(curr))));
         }
       }
       input++;
