@@ -43,7 +43,7 @@ char rule4[3] = "+E";
 char rule5[3] = "-E";
 char rule6[3] = "*E";
 char rule7[3] = "/E";
-char rule8[3] = "";
+char rule8[3] = '\0';
 char *grammar[9] = {,"NI","ENA","E(E)","A+E","A-E","A*E","A/E","A"};
 
 
@@ -125,13 +125,13 @@ char* action(char x, char y){
     return "ENA";
   else if(x == 'A' && y == '+')
     return "A+E";
-  else if(x == "A" && y == "-")
+  else if(x == 'A' && y == '-')
     return "A-E";
-  else if(x == "A" && y == "*")
+  else if(x == 'A' && y == '*')
     return "A*E";
-  else if(x=="A" && y == "/")
+  else if(x=='A' && y == '/')
     return "A/E";
-  else if (x == "A" && y == "")
+  else if (x == 'A' && y == '\0')
     return "";
 }
 //Table Driven Parser
@@ -147,7 +147,7 @@ Tree parse(char input[]){
 	nextrule = action(peek(),ahead); //predicts next rule
 	if(nextrule != ""){
 	  pop();
-	  for(int i = sizeOf nextrule -1; i > -1; i--)
+	  for(int i = sizeOf(nextrule) -1; i > -1; i--)
 	    push(nextrule[i]); //push rule onto stack
 	}
 	else
