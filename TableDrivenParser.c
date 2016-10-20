@@ -12,7 +12,7 @@ typedef struct NODE *Tree;
 struct NODE{
   char label;
   Tree leftmostChild, rightSibling;
-};
+}NODE;
 
 Tree makeNode0(char x);
 Tree makeNode1(char x, Tree t);
@@ -43,13 +43,11 @@ char rule4[3] = "+E";
 char rule5[3] = "-E";
 char rule6[3] = "*E";
 char rule7[3] = "/E";
-char rule8[3] = '\0';
-char *grammar[9] = {,"NI","ENA","E(E)","A+E","A-E","A*E","A/E","A"};
+char rule8[3] = "";
+char *grammar[9] = {"NI","ENA","E(E)","A+E","A-E","A*E","A/E","A"};
 
 
 void main(){
-  input = "()()";
-  input = readFile(argv[1]);
   parseTree = (Tree) malloc(sizeof(struct NODE));
 }
 
@@ -147,7 +145,7 @@ Tree parse(char input[]){
 	nextrule = action(peek(),ahead); //predicts next rule
 	if(nextrule != ""){
 	  pop();
-	  for(int i = sizeOf(nextrule) -1; i > -1; i--)
+	  for(int i = strlen(nextrule) -1; i > -1; i--)
 	    push(nextrule[i]); //push rule onto stack
 	}
 	else
