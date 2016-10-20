@@ -113,8 +113,9 @@ Tree Pls(){
     case '9':
       if(peek(nodeS) != NULL){
         if(peekNext() == '0'||'1'||'2'||'3'||'4'||'5'||'6'||'7'||'8'||'9'){
+          char d = peekNext();
           input++;
-          push(nodeS, (makeNode1('E', makeNode2('N', makeNode1('N', makeNode1('D', makeNode0(curr))), makeNode1('D', madeNode0(peekNext()))))));
+          push(nodeS, (makeNode1('E', makeNode2('N', makeNode1('N', makeNode1('D', makeNode0(curr))), makeNode1('D', madeNode0(d))))));
         }
         else{
           push(nodeS, (makeNode1('E', makeNode1('N', makeNode1('D', makeNode0(curr))))));
