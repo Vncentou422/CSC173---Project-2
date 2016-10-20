@@ -138,7 +138,7 @@ char* action(char x, char y){
 Tree parse(char input[]){
   push('E'); //push start symbol on stack
   int counter = 0;
-  char ahead = input[counter + 1]//lookahead
+  char ahead = input[counter + 1];//lookahead
     
   while(size != EMPTY){
     if(peek() != '(' || peek() != '+' || peek() != '-' || peek() != '*' || peek() != '/' || peek() != '0'|| peek() != '1' || peek() !=  '2' || peek() != '3' ||peek() != '4' ||peek() != '5' ||peek() != '6' ||peek() != '7' ||peek() != '8' ||peek() != '9') //if top of stack is not a terminal
