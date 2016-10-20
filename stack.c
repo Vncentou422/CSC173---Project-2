@@ -72,3 +72,7 @@ char pop(){
   return output;
 }
 */
+
+int main(){
+  return 0;
+}
