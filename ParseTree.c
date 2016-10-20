@@ -75,7 +75,7 @@ Tree * newTree(char **argv){
     input += in;
   }
   fclose(file);
-  input = "1*2";
+  input = "1*2+3";
   printf("%s\n", input);
 }
 
@@ -155,6 +155,7 @@ char peekNext(){
 
 void printPTree(Tree t, int indent){
   int i;
+  printf("\n");
   for(i=0;i<=indent;i++){
     printf(" ");
   }
@@ -162,7 +163,7 @@ void printPTree(Tree t, int indent){
   char c = t->label;
   printf("%c ", c);
   if(t->leftmostChild!=NULL){
-    printf("\n");
+    //printf("\n");
     indent++;
     Tree tempT=t->leftmostChild;
     printPTree(tempT,indent);
@@ -170,17 +171,18 @@ void printPTree(Tree t, int indent){
     while(tempT->rightSibling!=NULL){
       tempT=tempT->rightSibling;
       printPTree(tempT,indent);
-      printf(")");
+      //printf(")\n");
     }
   }
   else{
-
+    return;
   }
 
 }
 
 void printPT(Tree t){
   printPTree(t,0);
+  printf("\n");
 }
 //do all of the tree making
 Tree Pls(){
