@@ -3,36 +3,72 @@
 #include <stdio.h>
 
 #define MAX 100
+#define EMPTY 0
 
+int size = EMPTY;
+char x[MAX];
+/*
 struct stack{
-  int x[MAX];
-  int size = 0;
+  char x[MAX];
+  int size;
 };
-typedef struct Stack Stack;
+typedef struct stack stack;
+*/
 
-int peek(stack *y){
+/*
+char peek(stack *y){
   if (y->size == 0){
     printf("error stack empty\n");
-    return -1;
   }
-  return y->x[size-1];
+  return y->x[y->size-1];
+}
+*/
+char peek(){
+  if (size != EMPTY)
+    return x[size-1];
 }
 
-void push(stack *y, int input){
+
+/*
+void push(stack *y, char input){
   if(y->size < MAX){
+    y->size++;
+    y->x[(y->size)-1] = input;
+  }
+  else
+    printf("error stack full\n");
+}
+*/
+
+void push(char input){
+  if(size < MAX){
     size++;
-    y->x[(y->size)-1] = d;
+    x[size] = input;
   }
   else
     printf("error stack full\n");
 }
 
-int pop(stack *y){
+/*
+char pop(stack *y){
+  char output;
   if (y->size == 0)
     printf("error stack empty\n");
   else{
-    int output = y->x[(y->size)-1];
+    output = y->x[(y->size)-1];
     y->size--;
+  }
+  return output;
+}
+*/
+
+char pop(){
+  char output;
+  if(size == EMPTY)
+    printf("error stack empty\n");
+  else{
+    output = x[size-1];
+    size--;
   }
   return output;
 }

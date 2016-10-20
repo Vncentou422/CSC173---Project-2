@@ -1,12 +1,21 @@
 #include <stdio.h>
 
 #define MAX 100
+#define EMPTY 0
 
+int size;
+char x[MAX];
+/*
 struct stack{
-  int x[MAX];
+  char x[MAX];
   int size = 0;
 };
-typedef struct Stack Stack;
-int peek(stack *y);
+typedef struct stack stack;
+char peek(stack *y);
 void push(stack *y, int input);
-int pop(stack *y);
+char pop(stack *y);
+*/
+
+char peek();
+void push(char input);
+char pop();
