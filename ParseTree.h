@@ -7,13 +7,14 @@ typedef struct {
   char label;
   Tree leftmostChild, rightSibling;
 }NODE;
-Tree parseTree; /* holds the result of the parse */
-char *input; /* current position in input string */
-char prev;
-char curr;
-char ahead;
-int parens;
-Tree tempL, tempR;
+// Tree parseTree; /* holds the result of the parse */
+// char *input; /* current position in input string */
+// char prev;
+// char curr;
+// char ahead;
+// int parens;
+// int next;
+// treeStack *nodeS;
 extern Tree makeNode0(char x);
 extern Tree makeNode1(char x, Tree t);
 extern Tree makeNode2(char x, Tree t1, Tree t2);
