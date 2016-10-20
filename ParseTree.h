@@ -21,4 +21,4 @@ extern Tree makeNode3(char x, Tree t1, Tree t2, Tree t3);
 extern int lookahead(char c);
 extern int matchTerminal(char c);
 extern char peekNext();
-extern Tree* Pls();
+extern Tree Pls();
