@@ -121,6 +121,8 @@ char pop(){
 char* action(char x, char y){
   if(x == 'E' && y == 'N')
     return "ENA";
+  else if(x == 'E' && y == ')')
+    return "(E)";
   else if(x == 'A' && y == '+')
     return "A+E";
   else if(x == 'A' && y == '-')
