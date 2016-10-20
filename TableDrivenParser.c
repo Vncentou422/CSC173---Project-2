@@ -2,56 +2,69 @@
 #include <stdlib.h>
 #include <stack.h>
 
-typedef struct NODE *Tree;
+typedef struct NODE *TREE;
 
 struct NODE{
   char label;
-  Tree leftmostChild, rightSibling;
+  TREE leftmostChild, rightSibling;
 };
 
-Tree makeNode0(char x);
-Tree makeNode1(char x, Tree t);
-Tree makeNode2(char x, Tree t1, Tree t2);
-Tree makeNode3(char x, Tree t1, Tree t2, Tree t3);
+TREE makeNode0(char x);
+TREE makeNode1(char x, TREE t);
+TREE makeNode2(char x, TREE t1, TREE t2);
+TREE makeNode3(char x, TREE t1, TREE t2, TREE t3);
+TREE parse(char input[]);
 
-Tree parseTree; /* holds the result of the parse */
+TREE parseTree; /* holds the result of the parse */
 char *input; /* current position in input string */
 char prev;
 char curr;
 char ahead;
 int parens;
 int next;
-stack nodeS;
+stack stacks;
+//N = Number,
+char rule0[10] = {'0','1','2','3','4','5','6','7','8','9'};
+char rule1[3] = "NI";
+char rule2[3] = "NA";
+char rule3[3] = "(E)";
+char rule4[3] = "+E";
+char rule5[3] = "-E";
+char rule6[3] = "*E";
+char rule7[3] = "/E";
+char rule8[3] = "";
+char grammar[9] = {rule0,rule1,rule2,rule3,rule4,rule5,rule6,rule7,rule8};
+
 
 void main(){
   input = "()()";
   input = readFile(argv[1]);
-  parseTree = (Tree) malloc(sizeof(struct NODE));
+  parseTree = (TREE) malloc(sizeof(struct NODE));
 }
 
-Tree makeNode0(char x){
-  Tree root;
-  root = (Tree) malloc(sizeof(struct NODE));
+TREE makeNode0(char x){
+  TREE root;
+  root = (TREE) malloc(sizeof(struct NODE));
   root->label = x;
   root->leftmostChild = NULL;
   root->rightSibling = NULL;
   return root;
 }
 //char is the root's label, various tree are the children
-Tree makeNode1(char x, Tree t){
-  Tree root;
+TREE makeNode1(char x, TREE t){
+  TREE root;
   root = makeNode0(x);
   root->leftmostChild = t;
   return root;
 }
-Tree makeNode2(char x, Tree t1, Tree t2){
-  Tree root;
+TREE makeNode2(char x, TREE t1, TREE t2){
+  TREE root;
   root = makeNode1(x, t1);
   t1->rightSibling = t2;
   return root;
 }
-Tree makeNode3(char x, Tree t1, Tree t2, Tree t3){
-  Tree root;
+TREE makeNode3(char x, TREE t1, TREE t2, TREE t3){
+  TREE root;
   root = makeNode1(x, t1);
   t1->rightSibling = t2;
   t2->rightSibling = t3;
@@ -72,3 +85,5 @@ int matchTerminal(char c){
 char peekNext(){
   return input[1];
 }
+
+

@@ -4,32 +4,32 @@
 
 #define MAX 100
 #define EMPTY 0
-
+/*
 int size = EMPTY;
 char x[MAX];
-/*
+*/
 struct stack{
   char x[MAX];
   int size;
 };
 typedef struct stack stack;
-*/
 
-/*
+
+
 char peek(stack *y){
   if (y->size == 0){
     printf("error stack empty\n");
   }
   return y->x[y->size-1];
 }
-*/
+/*
 char peek(){
   if (size != EMPTY)
     return x[size-1];
 }
+*/
 
 
-/*
 void push(stack *y, char input){
   if(y->size < MAX){
     y->size++;
@@ -38,8 +38,8 @@ void push(stack *y, char input){
   else
     printf("error stack full\n");
 }
-*/
 
+/*
 void push(char input){
   if(size < MAX){
     size++;
@@ -48,8 +48,8 @@ void push(char input){
   else
     printf("error stack full\n");
 }
+*/
 
-/*
 char pop(stack *y){
   char output;
   if (y->size == 0)
@@ -60,8 +60,7 @@ char pop(stack *y){
   }
   return output;
 }
-*/
-
+/*
 char pop(){
   char output;
   if(size == EMPTY)
@@ -72,3 +71,4 @@ char pop(){
   }
   return output;
 }
+*/
